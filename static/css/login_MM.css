@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Kanit', sans-serif;
+    color: white;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #04364A;
+}
+
+.box {
+    position: relative;
+    width: 380px;
+    height: auto;
+    background: #63320e;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.form {
+    position: relative;
+    border-radius: 8px;
+    background: #ffffff;
+    z-index: 10;
+    padding: 50px 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form h2 {
+    color: #04364A;
+    font-weight: 500;
+    text-align: center;
+    letter-spacing: 0.1em;
+    margin-bottom: 40px;
+}
+
+.inputBox {
+    position: relative;
+    width: 100%;
+    margin-bottom: 35px;
+}
+
+.inputBox input {
+    width: 100%;
+    padding: 10px;
+    background: #f3f3f3; /* Simple background for the input */
+    border: 1px solid #ccc; /* Regular input border */
+    border-radius: 4px; /* Add rounded corners */
+    outline: none;
+    color: #04364A;
+    font-size: 1em;
+    letter-spacing: 0.05em;
+    transition: 0.3s;
+}
+
+.inputBox span {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    font-size: 1em;
+    color: #8f8f8f;
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+.inputBox input:focus ~ span,
+.inputBox input:valid ~ span {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px); /* Move the label up or fade it out */
+}
+
+.inputBox i {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 10;
+}
+
+.links {
+    display: flex;
+    justify-content: space-between;
+}
+
+.links a {
+    margin: 10px 0;
+    font-size: 0.85em;
+    color: #04364A;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.links a:hover {
+    color: #025175;
+}
+
+input[type="submit"] {
+    border: none;
+    outline: none;
+    background: #04364A;
+    padding: 12px;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #025175;
+}
+
+.alert {
+    color: red;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.inputBox a {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    cursor: pointer;
+}

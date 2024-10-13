@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configure Switchport</title>
+    <link rel="stylesheet" href="static/css/config_inter.css">
+    <script src="https://kit.fontawesome.com/317e5df4ed.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+        <!-- Side Navbar tag -->
+        <nav>
+            <ul>
+                <li>
+                    <a href="#" class="logo">
+                        <img src="static/img/Logo-C.jpg" alt="">
+                        <span class="nav-item"></span>
+                    </a>
+                </li>
+    
+    
+                <li><a href="/command">
+                    <i class="fas fa-home"></i>
+                    <span class="nav-item">Home</span>
+                </a></li>
+    
+    
+                <li><a methods='POST' href="/showrun">
+                    <i class="fas fa-solid fa-file-arrow-up"></i>
+                    <span class="nav-item">Run Config</span>
+                </a></li>
+    
+    
+                <li><a methods='POST' href="/showipinterface">
+                    <i class="fas fa-solid fa-arrow-up-9-1"></i>
+                    <span class="nav-item">Ip Interface</span>
+                </a></li>
+    
+    
+                <li><a methods='POST' href="/showvlan">
+                    <i class="fas fa-regular fa-file-lines"></i>
+                    <span class="nav-item">Show Vlan</span>
+                </a></li>
+                
+            
+    
+    
+                <li><a methods='POST' href="/configure_vlan">
+                    <i class="fas fa-solid fa-gears"></i>
+                    <span class="nav-item">Config Vlan</span>
+                </a></li>
+    
+    
+                <li><a methods='POST' href="/interface_port">
+                    <i class="fas fa-solid fa-screwdriver-wrench"></i>
+                    <span class="nav-item">Config Interface</span>
+                </a></li>
+    
+    
+                <li><a methods='POST' href="/ip_route">
+                    <i class="fas fa-solid fa-keyboard"></i>
+                    <span class="nav-item">Config Routing</span>
+                </a></li>
+    
+    
+                <li><a methods='POST' href="/configure_interface">
+                    <i class="fas fa-solid fa-gear"></i>
+                    <span class="nav-item">Config Switch Port</span>
+                </a></li>
+    
+                <!-- Logout Function -->
+    
+                <div class="logout">
+                    <li><a href="/login">
+                        <i class="fas fa-solid fa-right-from-bracket"></i>
+                        <span class="nav-item">logout</span>
+                    </a></li>
+                </div>
+            </ul>
+        </nav>
+    <div class="wrapper1">
+        <div class="fram-showinterface">
+            <h1>Show Inter face CONFIG</h1>
+            <pre>{{ output }}
+            </pre>
+        </div>
+        
+        <div class="fram-configinterface">
+            <h1>Interface Configuration</h1>
+            <form id="configForm" method='POST' action="/configure_interface">
+                <div>
+                    <label for="interface">Interface:</label>
+                    <select name="interface">
+                        {% for interface in interface_list %}
+                        <option value="{{ interface }}">{{ interface }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+
+                <div>
+                    <label for="switchport">Add Switchport (Switch Layer 3) : </label>
+                    <input type="checkbox" name="switchport" id="switchport" value="yes">
+
+                    <!-- <label for="trunk_encapsulation">Add trunk encapsulation (Switch Layer 3) : </label>
+                    <input type="checkbox" name="trunk_encapsulation" id="trunk_encapsulation" value="yes"> -->
+
+                    <label for="mode">Mode:</label>
+                    <select name="mode" id="modeSelect" onchange="showHideVlanInput()">
+                        <option value="trunk">Trunk</option>
+                        <option value="access">Access</option>
+                    </select>
+                </div>
+                <div id="vlanInput" style="display: none;">
+                    <label for="vlan_id">Access VLAN ID:</label>
+                    <input type="text" name="vlan_id" id="vlanId" />
+                </div>
+
+                <div>
+                    <label for="enableCommand">Enable Command:</label>
+                    <input type="checkbox" name="enable_command" id="enableCommand" onclick="showCommandInput()" />
+                </div>
+                <div id="commandInput" style="display: none;">
+                    <label for="access_vlan">Allow vlan : </label>
+                    <input type="text" name="access_vlan" id="access_vlan" />
+                </div>
+
+                <div class="button1">
+                    <input type="submit" value="Configure" />
+                </div>
+            </form>
+            <div id="output"></div>
+        </div>
+
+        <div class="fram_removeSW">
+            <h1>Remove Switch Mode</h1>
+
+            <form id="configForm" method='POST' 9    action="/re_sw">
+                <div>
+                    <label for="interface">Interface:</label>
+                    <select name="interface">
+                        {% for interface in interface_list %}
+                        <option value="{{ interface }}">{{ interface }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+
+                <div>
+                    <label for="re_switchport">Remove Switchport (Switch Layer 3) : </label>
+                    <input type="checkbox" name="re_switchport" id="re_switchport" value="yes">
+
+                    <!-- <label for="trunk_encapsulation">Add trunk encapsulation (Switch Layer 3) : </label>
+                    <input type="checkbox" name="trunk_encapsulation" id="trunk_encapsulation" value="yes"> -->
+
+                    <label for="mode">Mode:</label>
+                    <select name="mode" id="re_modeSelect" onchange="showHideRemoveVlanInput()">
+                        <option value="trunk">Trunk</option>
+                        <option value="access">Access</option>
+                    </select>
+                </div>
+                <div id="re_vlanInput" style="display: none;">
+                    <label for="re_vlan_id">Del Access VLAN ID:</label>
+                    <input type="text" name="re_vlan_id" id="re_vlan_id" />
+                </div>
+
+                <div>
+                    <label for="re_command">Enable Command:</label>
+                    <input type="checkbox" name="re_command" id="re_command" onclick="showREInput()" />
+                </div>
+                <div id="re_comInput" style="display: none;">
+                    <label for="re_access_vlan">Remove Allow vlan : </label>
+                    <input type="text" name="re_access_vlan" id="re_access_vlan" />
+                </div>
+
+                <div class="button3">
+                    <input type="submit" value="Configure" />
+                </div>
+            </form>
+            <div id="output"></div>
+        </div>
+
+        <script>
+            function showHideVlanInput() {
+                var modeSelect = document.getElementById("modeSelect");
+                var vlanInput = document.getElementById("vlanInput");
+
+                if (modeSelect.value === "access") {
+                    vlanInput.style.display = "block";
+                } else {
+                    vlanInput.style.display = "none";
+                }
+            }
+
+            function showHideRemoveVlanInput() {
+                var modeSelect = document.getElementById("re_modeSelect");
+                var vlanInput = document.getElementById("re_vlanInput");
+
+                if (modeSelect.value === "access") {
+                    vlanInput.style.display = "block";
+                } else {
+                    vlanInput.style.display = "none";
+                }
+            }
+
+            function showCommandInput() {
+                var enableCommandCheckbox = document.getElementById("enableCommand");
+                var commandInput = document.getElementById("commandInput");
+
+                if (enableCommandCheckbox.checked) {
+                    commandInput.style.display = "block";
+                } else {
+                    commandInput.style.display = "none";
+                }
+            }
+            function showREInput() {
+                var enableCommandCheckbox = document.getElementById("re_command");
+                var commandInput = document.getElementById("re_comInput");
+
+                if (enableCommandCheckbox.checked) {
+                    commandInput.style.display = "block";
+                } else {
+                    commandInput.style.display = "none";
+                }
+            }
+        </script>
+    </div>    
+</body>
+</html>

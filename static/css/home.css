@@ -1,0 +1,123 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif; /* Basic font */
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f4f4f4; /* Light background */
+}
+
+/* Navbar Styles */
+nav {
+    width: 250px;
+    background-color: #333; /* Dark background */
+    padding-top: 20px;
+}
+
+nav ul {
+    list-style-type: none;
+}
+
+nav ul li {
+    width: 100%;
+}
+
+nav ul li a {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: #fff; /* White text */
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: #444; /* Slight hover effect */
+}
+
+nav ul li a .fas {
+    margin-right: 10px; /* Space between icon and text */
+}
+
+nav ul li .logo {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+/* Container Styles */
+.container {
+    flex: 1;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper {
+    background-color: #fff; /* White background for content area */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    width: 400px;
+    text-align: center;
+}
+
+.wrapper h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Form Styles */
+.form_mange {
+    display: flex;
+    flex-direction: column;
+}
+
+.form_mange input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.form_mange button {
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.form_mange button:hover {
+    background-color: #555; /* Hover effect for button */
+}
+
+/* Logout Styles */
+.logout {
+    margin-top: auto; /* Push the logout to the bottom of the navbar */
+}
+
+.logout a {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px; /* Ensure padding is consistent */
+    text-decoration: none;
+    color: #fff;
+    width: 100%; /* Make the link span the full width */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.logout a:hover {
+    background-color: #444; /* Hover effect for logout link */
+}

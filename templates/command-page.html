@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Enter Command</title>
+</head>
+<body>
+    <h2>Enter a Cisco Command</h2>
+    <form method="POST" action="/command-run">
+        <label for="command">Enter a command:</label>
+        <input type="text" name="command" id="command" required>
+        <input type="submit" value="Execute">
+    </form>
+
+    <h3>Command Output:</h3>
+    <pre id="output"></pre>
+
+    <a href="/command">Back</a>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            var commandInput = document.getElementById('command');
+            var outputElement = document.getElementById('output');
+
+            fetch('/command-run', {
+                method: 'POST',
+                body: new URLSearchParams({
+                    'command': commandInput.value
+                }),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                }
+            })
+            .then(response => response.text())
+            .then(data => {
+                outputElement.textContent = data;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                outputElement.textContent = 'Error: ' + error;
+            });
+        });
+    </script>
+</body>
+</html>
